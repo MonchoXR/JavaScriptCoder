@@ -1,88 +1,210 @@
-let edad=0;
-let nombrejuego = "";
-let maquinaAletario = "";
-let jugada = "";
-let nombreJugada ="";
-let estadoJuego="";
+let cantidadMesa = 1;
+let stockMesa = 5;
+let stockLaptop = 3;
+let stockSilla = 7;
+let cantidadMesaActual;
+let cantidadLaptopActual;
+let cantidadSillaActual;
+let cantidadLaptop = 1;
+let cantidadSilla = 1;
+let opcionMenu;
 
 
-alert("       Bienvenido al juego de: Papel - Piedra - Tijera ");
-let nombre = prompt("Ingresar Nombre");
 
-for (i = 1; i < 4; i++) {
-  if (nombre == "") {
-    nombre = prompt("Debe llenar su nombre, sino ir a Cancelar");
-  }
-  else{
+opcionMenu = parseInt(prompt(
+    "Bienvenido a Nuestra Tienda Virtual" + "\n" +
+      "Escoga nuestro producto por numero:" + "\n" +
+      "1. Mesa   --- $20.00" + "\n" +
+      "2. Laptop --- $1200.00" + "\n" +
+      "3. Silla      --- $40.00" + "\n" +
+      "0. Si desea Salir"
+  ));
+
+while (opcionMenu != 0) {
+  switch(opcionMenu){
+    case 1:
+      SubMenu(opcionMenu);
       break;
+
+    case 2:
+      SubMenu(opcionMenu);
+      break;
+
+    case 3:
+      SubMenu(opcionMenu);
+      break;
+
+    default:
+      opcionMenu = parseInt(prompt(
+        "Ingrese Nuevamente a Nuestra Tienda Virtual" + "\n" +
+          "Escoga nuestro producto por numero:" + "\n" +
+          "1. Mesa   --- $20.00" + "\n" +
+          "2. Laptop --- $1200.00" + "\n" +
+          "3. Silla      --- $40.00" + "\n" +
+          "0. Si desea Salir"
+      ));
+    
+        break;
   }
-  if(i==3){
-      alert("Supero numero de Intentos, Empieze de nuevo");
-  }
+
+  opcionMenu = parseInt(prompt(
+    "Bienvenido a Nuestra Tienda Virtual" + "\n" +
+      "Escoga nuestro producto por numero:" + "\n" +
+      "1. Mesa   --- $20.00" + "\n" +
+      "2. Laptop --- $1200.00" + "\n" +
+      "3. Silla      --- $40.00" + "\n" +
+      "0. Si desea Salir"
+  ));
+
 }
 
 
-if(nombre!="" && nombre!=null ){
- edad = parseInt(prompt("Ingresar su Edad"));
+function SubMenu(idPrducto) {
+  let opcionSubMenu = parseInt(
+    prompt(
+      "Presione " + 1 + " si desea ver Detalle del Producto." + "\n" +
+      "Presione " + 2 + " si desea añadir al Carrito de Compras."));
+
+  while (opcionSubMenu != "1" && opcionSubMenu != "2") {
+    opcionSubMenu = parseInt(prompt("Solo ingrese numero si es 1 ó 2"));
+  }
+
+  if (opcionSubMenu == 1) {
+    let opcionDetalleLocal = DetalleProducto(idPrducto);
+    if (opcionDetalleLocal == 1) {
+        stock(idPrducto);
+
+    } 
+    else {
+      CarritoDeCompras(idPrducto);
+    }
+  } 
+  else {
+    CarritoDeCompras(idPrducto);
+  }
+  
 }
 
-do {
-  if (isNaN(edad)) {
-    edad = parseInt(prompt("Ingresar su Edad - solo numeros! - 0 para salir"));
-  } else if (edad < 0) {
-    edad = parseInt( prompt("Ingresar su Edad - numeros mayores que 0! - 0 para salir"));
-  } else if (edad == 0) {
-    break;
-  } else if (edad > 0 && edad < 18) {
-    edad = parseInt(prompt("Ingresa edad - Solo juegan mayores de 18 años - 0 para salir"));
-  }
-}while (edad < 18 || isNaN(edad));
 
-if (edad != 0 ) {
-  jugada = prompt("Escriba p si es Piedra, l si es Papel  y t si es tijera");
+function DetalleProducto(idPrducto) {
+  let opcionDetalle;
 
-  while (jugada != "p" && jugada != "l" && jugada != "t") {
-    jugada = prompt(
-      "Escriba p si es Piedra, l si es Papel  y t si es tijera - solo esas letras"
+  if (idPrducto == 1) {
+    opcionDetalle = prompt(
+      "MESA GAMER" + "\n" +
+        "$20.00" + "\n" +
+        "Color:Rojo" + "\n" +
+        "Espectacular MesaGamer para la comodida de sus hijos." +"\n" +
+        "---------" + "\n" +
+        "Cant: " + cantidadMesa + "\n" +
+        "Presione 1 si desea añadir Cantidad?" + "\n" +
+        "Presione 2 si Desea añadir al Carrito"
+    );
+  } else if (idPrducto == 2) {
+    opcionDetalle = prompt(
+      "LAPTOP" + "\n" +
+        "$1200.00" + "\n" +
+        "Color:Negro" + "\n" +
+        "Lleve la mejor laptop con RTX3090." + "\n" +
+        "---------" + "\n" +
+        "Cant: " + cantidadLaptop + "\n" +
+        "Presione 1 si desea añadir Cantidad?" + "\n" +
+        "Presione 2 si Desea añadir al Carrito"
+    );
+  } else {
+    opcionDetalle = prompt(
+      "SILLA GAMER" + "\n" +
+        "$40.00" + "\n" +
+        "Color:Azul"+ "\n" + 
+        "Ultimo modelo Silla GAMER." + "\n" +
+        "---------" + "\n" +
+        "Cant: " + cantidadSilla + "\n" +
+        "Presione 1 si desea añadir Cantidad?" + "\n" +
+        "Presione 2 si Desea añadir al Carrito"
     );
   }
+  return opcionDetalle;
+}
 
-
-  if ("p" == jugada) {
-    alert("Escogiste Piedra");
-  }
-
-  if ("l" == jugada) {
-    alert("Escogiste Papel");
-  }
-
-  if ("t" == jugada) {
-    alert("Escogiste Tijera");
-  }
-
-  let NumeroAleatorio = Math.floor(Math.random() * 3) + 1;
-
-  if (NumeroAleatorio == 1) {
-    maquinaAletario = "p";
-    nombreJugada = "piedra";
-    alert("la maquina escogió " + nombreJugada);
-  } else if (NumeroAleatorio == 2) {
-    maquinaAletario = "l";
-    nombreJugada = "papel";
-    alert("la maquina escogió " +nombreJugada);
+function CarritoDeCompras(idPrducto) {
+  if (idPrducto == 1) {
+    alert("Carrito de Compra" + "\n" +
+        "-----------------------------" + "\n" +
+        "Producto" +"   Cantidad"+"    " + "Precio" +"    " + "IMP(20%)" +"       " +"Total" +"\n" +
+        "MESA    " +"           "+cantidadMesa+"           $" +20.0 +"             " +20 * 0.2 +"                " +120.0 * 1.2*cantidadMesaActual );
+  } else if (idPrducto == 2) {
+    alert("Carrito de Compra" +"\n" +
+        "-----------------------------" +"\n" +
+        "Producto" +"   Cantidad"+"    " +"Precio" +"     " +"IMP(20%)" + "       " +"Total" +"\n" +
+        "LAPTOP  " +"           "+cantidadLaptop+"    $" +1020.0 +"         " +1200 * 0.2 +"           " +1200.0 * 1.2*cantidadLaptop);
   } else {
-    maquinaAletario = "t";
-    nombreJugada = "Tijera";
-    alert("la maquina escogió: " + nombreJugada);
+    alert("Carrito de Compra" +"\n" +
+        "-----------------------------" +"\n" +
+        "Producto" +"   Cantidad"+"    " +"Precio" +"    " +"IMP(20%)" + "       " +"Total" +"\n" +
+        "SILLA    " +"           "+cantidadSilla+"       $" +40.0 + "             " +40 * 0.2 +"                " +40.0 * 1.2*cantidadSilla);
   }
+}
 
-  if (jugada == maquinaAletario) {
-    alert("Felicidades, Ganaste un Departamento!!! ");
-    estadoJuego="Ganador";
-  } else {
-    alert("sigue Intentando");
-    estadoJuego="Perdedor";
+
+function AdicionarCantidad(idPrducto){
+
+  if(idPrducto == 1){
+    cantidadMesa++;
   }
+  else if(idPrducto == 2){
+    cantidadLaptop++;
+  }
+  else{
+     cantidadSilla++;
+  }
+}
 
-  alert(" ******Mi reporte******* " + "\n" + "Mi Nombre es: " + nombre +"\n" + "Mi edad es: "+edad + "\n" + "Mi Jugada fue: " + nombreJugada + "\n" + "Estado de Jugada: "+ estadoJuego)
+function stock(idPrducto){
+
+  if (idPrducto == 1) {
+    cantidadMesaActual = cantidadMesa;
+    for ( cantidadMesaActual;cantidadMesaActual <= stockMesa;cantidadMesaActual++) {
+      if (cantidadMesaActual >= stockMesa) {
+        alert("Fuera de Stock");
+        return;
+      }
+      AdicionarCantidad(idPrducto);
+      let opcionDetalleLocal = DetalleProducto(idPrducto);
+      if (opcionDetalleLocal == 2) {
+        CarritoDeCompras(idPrducto);
+        return;
+      }
+    }
+  }
+  else if(idPrducto ==2){
+    cantidadLaptopActual = cantidadLaptop;
+    for ( cantidadLaptopActual;cantidadLaptopActual <= stockLaptop ;cantidadLaptopActual++) {
+      if (cantidadLaptopActual >= stockLaptop) {
+        alert("Fuera de Stock");
+        return;
+      }
+      AdicionarCantidad(idPrducto);
+      let opcionDetalleLocal = DetalleProducto(idPrducto);
+      if (opcionDetalleLocal == 2) {
+        CarritoDeCompras(idPrducto);
+        return;
+      }
+    }
+  }
+  else{
+    cantidadSillaActual = cantidadSilla;
+    for ( cantidadSillaActual;cantidadSillaActual <= stockSilla ;cantidadSillaActual++) {
+      if (cantidadSillaActual >= stockSilla) {
+        alert("Fuera de Stock");
+        return;
+      }
+      AdicionarCantidad(idPrducto);
+      let opcionDetalleLocal = DetalleProducto(idPrducto);
+      if (opcionDetalleLocal == 2) {
+        CarritoDeCompras(idPrducto);
+        return;
+      }
+    }
+    
+  }
 }
