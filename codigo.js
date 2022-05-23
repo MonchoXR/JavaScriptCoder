@@ -11,6 +11,7 @@ let opcionMenu;
 
 
 
+
 opcionMenu = parseInt(prompt(
     "Bienvenido a Nuestra Tienda Virtual" + "\n" +
       "Escoga nuestro producto por numero:" + "\n" +
@@ -136,17 +137,29 @@ function carritoDeCompras(idPrducto) {
     alert("Carrito de Compra" +"\n" +
         "-----------------------------" +"\n" +
         "Producto" +"   Cantidad"+"    " +"Precio" +"     " +"IMP(20%)" + "       " +"Total" +"\n" +
+<<<<<<< HEAD
         "LAPTOP  " +"           "+cantidadLaptop+"         $" +1020.0 +"         " +1200 * 0.2 +"           " +1200.0 * 1.2*cantidadLaptop);
+=======
+        "LAPTOP  " +"             "+cantidadLaptop+"       $" +1020.0 +"         " +1200 * 0.2 +"           " +1200.0 * 1.2*cantidadLaptop);
+>>>>>>> 99b06d6c3507f96a8f74488a81c07b8967802227
   } else {
     alert("Carrito de Compra" +"\n" +
         "-----------------------------" +"\n" +
         "Producto" +"   Cantidad"+"    " +"Precio" +"    " +"IMP(20%)" + "       " +"Total" +"\n" +
+<<<<<<< HEAD
         "SILLA    " +"           "+cantidadSilla+"           $" +40.0 + "             " +40 * 0.2 +"                " +40.0 * 1.2*cantidadSilla);
+=======
+        "SILLA    " +"              "+cantidadSilla+"        $" +40.0 + "             " +40 * 0.2 +"                " +40.0 * 1.2*cantidadSilla);
+>>>>>>> 99b06d6c3507f96a8f74488a81c07b8967802227
   }
 }
 
 
+<<<<<<< HEAD
 function adicionarCantidad(idPrducto){
+=======
+ function adicionarCantidad (idPrducto) {
+>>>>>>> 99b06d6c3507f96a8f74488a81c07b8967802227
 
   if(idPrducto == 1){
     cantidadMesa++;
@@ -157,9 +170,15 @@ function adicionarCantidad(idPrducto){
   else{
      cantidadSilla++;
   }
+
 }
 
+<<<<<<< HEAD
 // const adicionarCantidad = (idPrducto)=>{
+=======
+// const AdicionarCantidad =(idPrducto)=> {
+
+>>>>>>> 99b06d6c3507f96a8f74488a81c07b8967802227
 //   if(idPrducto == 1){
 //     cantidadMesa++;
 //   }
@@ -169,11 +188,18 @@ function adicionarCantidad(idPrducto){
 //   else{
 //      cantidadSilla++;
 //   }
+<<<<<<< HEAD
 // }
 
 
 
 
+=======
+
+// }
+
+
+>>>>>>> 99b06d6c3507f96a8f74488a81c07b8967802227
 function stock(idPrducto){
 
   if (idPrducto == 1) {
