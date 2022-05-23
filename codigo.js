@@ -23,15 +23,15 @@ opcionMenu = parseInt(prompt(
 while (opcionMenu != 0) {
   switch(opcionMenu){
     case 1:
-      SubMenu(opcionMenu);
+      subMenu(opcionMenu);
       break;
 
     case 2:
-      SubMenu(opcionMenu);
+      subMenu(opcionMenu);
       break;
 
     case 3:
-      SubMenu(opcionMenu);
+      subMenu(opcionMenu);
       break;
 
     default:
@@ -59,7 +59,7 @@ while (opcionMenu != 0) {
 }
 
 
-function SubMenu(idPrducto) {
+function subMenu(idPrducto) {
   let opcionSubMenu = parseInt(
     prompt(
       "Presione " + 1 + " si desea ver Detalle del Producto." + "\n" +
@@ -70,23 +70,23 @@ function SubMenu(idPrducto) {
   }
 
   if (opcionSubMenu == 1) {
-    let opcionDetalleLocal = DetalleProducto(idPrducto);
+    let opcionDetalleLocal = detalleProducto(idPrducto);
     if (opcionDetalleLocal == 1) {
         stock(idPrducto);
 
     } 
     else {
-      CarritoDeCompras(idPrducto);
+      carritoDeCompras(idPrducto);
     }
   } 
   else {
-    CarritoDeCompras(idPrducto);
+    carritoDeCompras(idPrducto);
   }
   
 }
 
 
-function DetalleProducto(idPrducto) {
+function detalleProducto(idPrducto) {
   let opcionDetalle;
 
   if (idPrducto == 1) {
@@ -126,7 +126,7 @@ function DetalleProducto(idPrducto) {
   return opcionDetalle;
 }
 
-function CarritoDeCompras(idPrducto) {
+function carritoDeCompras(idPrducto) {
   if (idPrducto == 1) {
     alert("Carrito de Compra" + "\n" +
         "-----------------------------" + "\n" +
@@ -136,17 +136,17 @@ function CarritoDeCompras(idPrducto) {
     alert("Carrito de Compra" +"\n" +
         "-----------------------------" +"\n" +
         "Producto" +"   Cantidad"+"    " +"Precio" +"     " +"IMP(20%)" + "       " +"Total" +"\n" +
-        "LAPTOP  " +"           "+cantidadLaptop+"    $" +1020.0 +"         " +1200 * 0.2 +"           " +1200.0 * 1.2*cantidadLaptop);
+        "LAPTOP  " +"           "+cantidadLaptop+"         $" +1020.0 +"         " +1200 * 0.2 +"           " +1200.0 * 1.2*cantidadLaptop);
   } else {
     alert("Carrito de Compra" +"\n" +
         "-----------------------------" +"\n" +
         "Producto" +"   Cantidad"+"    " +"Precio" +"    " +"IMP(20%)" + "       " +"Total" +"\n" +
-        "SILLA    " +"           "+cantidadSilla+"       $" +40.0 + "             " +40 * 0.2 +"                " +40.0 * 1.2*cantidadSilla);
+        "SILLA    " +"           "+cantidadSilla+"           $" +40.0 + "             " +40 * 0.2 +"                " +40.0 * 1.2*cantidadSilla);
   }
 }
 
 
-function AdicionarCantidad(idPrducto){
+function adicionarCantidad(idPrducto){
 
   if(idPrducto == 1){
     cantidadMesa++;
@@ -159,6 +159,21 @@ function AdicionarCantidad(idPrducto){
   }
 }
 
+// const adicionarCantidad = (idPrducto)=>{
+//   if(idPrducto == 1){
+//     cantidadMesa++;
+//   }
+//   else if(idPrducto == 2){
+//     cantidadLaptop++;
+//   }
+//   else{
+//      cantidadSilla++;
+//   }
+// }
+
+
+
+
 function stock(idPrducto){
 
   if (idPrducto == 1) {
@@ -168,10 +183,10 @@ function stock(idPrducto){
         alert("Fuera de Stock");
         return;
       }
-      AdicionarCantidad(idPrducto);
-      let opcionDetalleLocal = DetalleProducto(idPrducto);
+      adicionarCantidad(idPrducto);
+      let opcionDetalleLocal = detalleProducto(idPrducto);
       if (opcionDetalleLocal == 2) {
-        CarritoDeCompras(idPrducto);
+        carritoDeCompras(idPrducto);
         return;
       }
     }
@@ -183,10 +198,10 @@ function stock(idPrducto){
         alert("Fuera de Stock");
         return;
       }
-      AdicionarCantidad(idPrducto);
-      let opcionDetalleLocal = DetalleProducto(idPrducto);
+      adicionarCantidad(idPrducto);
+      let opcionDetalleLocal = detalleProducto(idPrducto);
       if (opcionDetalleLocal == 2) {
-        CarritoDeCompras(idPrducto);
+        carritoDeCompras(idPrducto);
         return;
       }
     }
@@ -198,10 +213,10 @@ function stock(idPrducto){
         alert("Fuera de Stock");
         return;
       }
-      AdicionarCantidad(idPrducto);
-      let opcionDetalleLocal = DetalleProducto(idPrducto);
+      adicionarCantidad(idPrducto);
+      let opcionDetalleLocal = detalleProducto(idPrducto);
       if (opcionDetalleLocal == 2) {
-        CarritoDeCompras(idPrducto);
+        carritoDeCompras(idPrducto);
         return;
       }
     }
