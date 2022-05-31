@@ -1,225 +1,152 @@
-let cantidadMesa = 1;
-let stockMesa = 5;
-let stockLaptop = 3;
-let stockSilla = 7;
-let cantidadMesaActual;
-let cantidadLaptopActual;
-let cantidadSillaActual;
-let cantidadLaptop = 1;
-let cantidadSilla = 1;
-let opcionMenu;
-
-
-
-opcionMenu = parseInt(prompt(
-    "Bienvenido a Nuestra Tienda Virtual" + "\n" +
-      "Escoga nuestro producto por numero:" + "\n" +
-      "1. Mesa   --- $20.00" + "\n" +
-      "2. Laptop --- $1200.00" + "\n" +
-      "3. Silla      --- $40.00" + "\n" +
-      "0. Si desea Salir"
-  ));
-
-while (opcionMenu != 0) {
-  switch(opcionMenu){
-    case 1:
-      subMenu(opcionMenu);
-      break;
-
-    case 2:
-      subMenu(opcionMenu);
-      break;
-
-    case 3:
-      subMenu(opcionMenu);
-      break;
-
-    default:
-      opcionMenu = parseInt(prompt(
-        "Ingrese Nuevamente a Nuestra Tienda Virtual" + "\n" +
-          "Escoga nuestro producto por numero:" + "\n" +
-          "1. Mesa   --- $20.00" + "\n" +
-          "2. Laptop --- $1200.00" + "\n" +
-          "3. Silla      --- $40.00" + "\n" +
-          "0. Si desea Salir"
-      ));
-    
-        break;
+class Producto {
+  constructor(nombre, precio, stock) {
+    this.nombre = nombre.toUpperCase();
+    this.precio = precio;
+    this.stock = stock;
   }
-
-  opcionMenu = parseInt(prompt(
-    "Bienvenido a Nuestra Tienda Virtual" + "\n" +
-      "Escoga nuestro producto por numero:" + "\n" +
-      "1. Mesa   --- $20.00" + "\n" +
-      "2. Laptop --- $1200.00" + "\n" +
-      "3. Silla      --- $40.00" + "\n" +
-      "0. Si desea Salir"
-  ));
-
 }
 
+class Carrito {
+  constructor(nombre, precio) {
+    this.nombre = nombre.toUpperCase();
+    this.precio = precio;
+  }
+}
+const productos = [];
+let stock = 2;
+let conta = 0;
 
-function subMenu(idPrducto) {
-  let opcionSubMenu = parseInt(
+const carritos = [];
+
+
+let idProducto;
+
+do {
+  idProducto = parseInt(
     prompt(
-      "Presione " + 1 + " si desea ver Detalle del Producto." + "\n" +
-      "Presione " + 2 + " si desea añadir al Carrito de Compras."));
+      "Bienvenido a Nuestra Tienda Virtual\n" +
+        "Escoga nuestro producto por numero:\n" +
+        "1. Mesa   --- $20.00\n" +
+        "2. Laptop --- $1200.00\n" +
+        "3. Silla      --- $40.00\n" +
+        "4. Ver estado de Carrito\n" +
+        "0. Si desea Salir"
+    )
+  );
 
-  while (opcionSubMenu != "1" && opcionSubMenu != "2") {
-    opcionSubMenu = parseInt(prompt("Solo ingrese numero si es 1 ó 2"));
+  while (
+    idProducto != 1 &&
+    idProducto != 2 &&
+    idProducto != 3 &&
+    idProducto != 4 &&
+    idProducto != 0
+  ) {
+    idProducto = parseInt(
+      prompt("Solo ingrese unb numero 1, 2 ,3, 4 ó 0 para salir"));
   }
 
-  if (opcionSubMenu == 1) {
-    let opcionDetalleLocal = detalleProducto(idPrducto);
-    if (opcionDetalleLocal == 1) {
-        stock(idPrducto);
 
-    } 
-    else {
-      carritoDeCompras(idPrducto);
+  if (idProducto != 0) {
+    if (idProducto == 4) {
+      detalleCarrito();
+    } else {
+      let opcionCarrito = detalleProducto(idProducto);
+
+      if (opcionCarrito == 1) {
+        if (idProducto == 1) {
+          carritos.push(new Carrito("Mesa", "20"));
+        } else if (idProducto == 2) {
+          carritos.push(new Carrito("Laptop", "1200"));
+        } else {
+          carritos.push(new Carrito("Silla", "40"));
+        }
+      }
+
+      if (opcionCarrito == 2) {
+        if (idProducto == 1) {
+          eliminarCarrito("MESA");
+        }
+
+        if (idProducto == 2) {
+          eliminarCarrito("LAPTOP");
+        }
+
+        if (idProducto == 3) {
+          eliminarCarrito("SILLA");
+        }
+      }
     }
-  } 
-  else {
-    carritoDeCompras(idPrducto);
   }
-  
-}
+} while (idProducto != 0);
 
 
-function detalleProducto(idPrducto) {
-  let opcionDetalle;
 
-  if (idPrducto == 1) {
-    opcionDetalle = prompt(
-      "MESA GAMER" + "\n" +
-        "$20.00" + "\n" +
-        "Color:Rojo" + "\n" +
-        "Espectacular MesaGamer para la comodida de sus hijos." +"\n" +
-        "---------" + "\n" +
-        "Cant: " + cantidadMesa + "\n" +
-        "Presione 1 si desea añadir Cantidad?" + "\n" +
-        "Presione 2 si Desea añadir al Carrito"
+function detalleProducto(idProducto) {
+  let opcionCarrito;
+
+  if (idProducto == 1) {
+    opcionCarrito = prompt(
+      "MESA GAMER\n" +
+        "$20.00\n" +
+        "Color:Rojo\n" +
+        "Espectacular MesaGamer para la comodida de sus hijos.\n" +
+        "---------\n" +
+        "Presione 1 si Desea añadir al Carrito\n"+
+        "Presione 2 si Desea elimibar del Carrito"
     );
-  } else if (idPrducto == 2) {
-    opcionDetalle = prompt(
-      "LAPTOP" + "\n" +
-        "$1200.00" + "\n" +
-        "Color:Negro" + "\n" +
-        "Lleve la mejor laptop con RTX3090." + "\n" +
-        "---------" + "\n" +
-        "Cant: " + cantidadLaptop + "\n" +
-        "Presione 1 si desea añadir Cantidad?" + "\n" +
-        "Presione 2 si Desea añadir al Carrito"
+  } else if (idProducto == 2) {
+    opcionCarrito = prompt(
+      "LAPTOP" +
+        "$1200.00\n" +
+        "Color:Negro\n"+
+        "Lleve la mejor laptop con RTX3090.\n" +
+        "---------\n" +
+        "Presione 1 si Desea añadir al Carrito\n"+
+        "Presione 2 si Desea elimibar del Carrito"
     );
   } else {
-    opcionDetalle = prompt(
-      "SILLA GAMER" + "\n" +
-        "$40.00" + "\n" +
-        "Color:Azul"+ "\n" + 
-        "Ultimo modelo Silla GAMER." + "\n" +
-        "---------" + "\n" +
-        "Cant: " + cantidadSilla + "\n" +
-        "Presione 1 si desea añadir Cantidad?" + "\n" +
-        "Presione 2 si Desea añadir al Carrito"
+    opcionCarrito = prompt(
+      "SILLA GAMER\n" +
+        "$40.00\n" +
+        "Color:Azul\n" +
+        "Ultimo modelo Silla GAMER.\n" +
+        "---------\n" +
+        "Presione 1 si Desea añadir al Carrito\n"+
+        "Presione 2 si Desea elimibar del Carrito"
     );
   }
-  return opcionDetalle;
+  return opcionCarrito;
 }
 
-function carritoDeCompras(idPrducto) {
-  if (idPrducto == 1) {
-    alert("Carrito de Compra" + "\n" +
-        "-----------------------------" + "\n" +
-        "Producto" +"   Cantidad"+"    " + "Precio" +"    " + "IMP(20%)" +"       " +"Total" +"\n" +
-        "MESA    " +"           "+cantidadMesa+"           $" +20.0 +"             " +20 * 0.2 +"                " +120.0 * 1.2*cantidadMesaActual );
-  } else if (idPrducto == 2) {
-    alert("Carrito de Compra" +"\n" +
-        "-----------------------------" +"\n" +
-        "Producto" +"   Cantidad"+"    " +"Precio" +"     " +"IMP(20%)" + "       " +"Total" +"\n" +
-        "LAPTOP  " +"           "+cantidadLaptop+"         $" +1020.0 +"         " +1200 * 0.2 +"           " +1200.0 * 1.2*cantidadLaptop);
+
+function eliminarCarrito(producto) {
+  if (carritos == "") {
+    return;
   } else {
-    alert("Carrito de Compra" +"\n" +
-        "-----------------------------" +"\n" +
-        "Producto" +"   Cantidad"+"    " +"Precio" +"    " +"IMP(20%)" + "       " +"Total" +"\n" +
-        "SILLA    " +"           "+cantidadSilla+"           $" +40.0 + "             " +40 * 0.2 +"                " +40.0 * 1.2*cantidadSilla);
+    for (let i = 0; i < carritos.length; i++) {
+      if (carritos[i].nombre.includes(producto)) {
+        let index = carritos.map((producto) => producto.nombre).indexOf(producto);
+        carritos.splice(index, 1);
+        eliminarCarrito(producto); //use recursividad porque con la actualizacion del splice no me toma la nueva longitud
+      } else {
+        alert("no se tiene el producto " + producto + " en su carrito");
+      }
+    }
   }
 }
 
+function detalleCarrito(){
 
-function adicionarCantidad(idPrducto){
+  let carritoTotal = [];
 
-  if(idPrducto == 1){
-    cantidadMesa++;
+  for (const elemento of carritos) {
+    carritoTotal.push(elemento.nombre + " " + elemento.precio);
   }
-  else if(idPrducto == 2){
-    cantidadLaptop++;
+  if (carritos.length == 0) {
+    alert("No Tiene Productos Agregados");
+  } else {
+    alert("mis produtos son: \n" + carritoTotal.join("\n"));
   }
-  else{
-     cantidadSilla++;
-  }
-}
-
-// const adicionarCantidad = (idPrducto)=>{
-//   if(idPrducto == 1){
-//     cantidadMesa++;
-//   }
-//   else if(idPrducto == 2){
-//     cantidadLaptop++;
-//   }
-//   else{
-//      cantidadSilla++;
-//   }
-// }
 
 
-
-
-function stock(idPrducto){
-
-  if (idPrducto == 1) {
-    cantidadMesaActual = cantidadMesa;
-    for ( cantidadMesaActual;cantidadMesaActual <= stockMesa;cantidadMesaActual++) {
-      if (cantidadMesaActual >= stockMesa) {
-        alert("Fuera de Stock");
-        return;
-      }
-      adicionarCantidad(idPrducto);
-      let opcionDetalleLocal = detalleProducto(idPrducto);
-      if (opcionDetalleLocal == 2) {
-        carritoDeCompras(idPrducto);
-        return;
-      }
-    }
-  }
-  else if(idPrducto ==2){
-    cantidadLaptopActual = cantidadLaptop;
-    for ( cantidadLaptopActual;cantidadLaptopActual <= stockLaptop ;cantidadLaptopActual++) {
-      if (cantidadLaptopActual >= stockLaptop) {
-        alert("Fuera de Stock");
-        return;
-      }
-      adicionarCantidad(idPrducto);
-      let opcionDetalleLocal = detalleProducto(idPrducto);
-      if (opcionDetalleLocal == 2) {
-        carritoDeCompras(idPrducto);
-        return;
-      }
-    }
-  }
-  else{
-    cantidadSillaActual = cantidadSilla;
-    for ( cantidadSillaActual;cantidadSillaActual <= stockSilla ;cantidadSillaActual++) {
-      if (cantidadSillaActual >= stockSilla) {
-        alert("Fuera de Stock");
-        return;
-      }
-      adicionarCantidad(idPrducto);
-      let opcionDetalleLocal = detalleProducto(idPrducto);
-      if (opcionDetalleLocal == 2) {
-        carritoDeCompras(idPrducto);
-        return;
-      }
-    }
-    
-  }
 }
