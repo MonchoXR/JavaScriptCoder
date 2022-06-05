@@ -51,19 +51,22 @@ do {
       detalleCarrito();
     } else {
       let opcionCarrito = detalleProducto(idProducto);
-
+      // console.log("Mi id es :" +idProducto + " y mi opcionCarrito es "+opcionCarrito);
       if (opcionCarrito == 1) {
         if (idProducto == 1) {
+  
           carritos.push(new Carrito("Mesa", "20"));
         } else if (idProducto == 2) {
           carritos.push(new Carrito("Laptop", "1200"));
         } else {
+          console.log("entra push silla");
           carritos.push(new Carrito("Silla", "40"));
         }
       }
 
       if (opcionCarrito == 2) {
         if (idProducto == 1) {
+          
           eliminarCarrito("MESA");
         }
 
@@ -80,12 +83,17 @@ do {
 } while (idProducto != 0);
 
 
+console.log(carritos);
+let indice2=carritos.findIndex((c)=>c.nombre=="MESA");
+console.log("Mi indice es: "+indice2); 
+
+
 
 function detalleProducto(idProducto) {
   let opcionCarrito;
 
   if (idProducto == 1) {
-    opcionCarrito = prompt(
+    opcionCarrito = parseInt(prompt(
       "MESA GAMER\n" +
         "$20.00\n" +
         "Color:Rojo\n" +
@@ -93,9 +101,9 @@ function detalleProducto(idProducto) {
         "---------\n" +
         "Presione 1 si Desea añadir al Carrito\n"+
         "Presione 2 si Desea elimibar del Carrito"
-    );
+    ));
   } else if (idProducto == 2) {
-    opcionCarrito = prompt(
+    opcionCarrito = parseInt(prompt(
       "LAPTOP" +
         "$1200.00\n" +
         "Color:Negro\n"+
@@ -103,9 +111,9 @@ function detalleProducto(idProducto) {
         "---------\n" +
         "Presione 1 si Desea añadir al Carrito\n"+
         "Presione 2 si Desea elimibar del Carrito"
-    );
+    ));
   } else {
-    opcionCarrito = prompt(
+    opcionCarrito = parseInt(prompt(
       "SILLA GAMER\n" +
         "$40.00\n" +
         "Color:Azul\n" +
@@ -113,7 +121,7 @@ function detalleProducto(idProducto) {
         "---------\n" +
         "Presione 1 si Desea añadir al Carrito\n"+
         "Presione 2 si Desea elimibar del Carrito"
-    );
+    ));
   }
   return opcionCarrito;
 }
@@ -123,15 +131,14 @@ function eliminarCarrito(producto) {
   if (carritos == "") {
     return;
   } else {
-    for (let i = 0; i < carritos.length; i++) {
-      if (carritos[i].nombre.includes(producto)) {
-        let index = carritos.map((producto) => producto.nombre).indexOf(producto);
+    // for (let i = 0; i < carritos.length; i++) {
+      // if (carritos[i].nombre.includes(producto)) {
+        if (carritos.some((c)=>c.nombre == producto)) {//Agreagando Funciones con Orden Superior
+        // let index = carritos.map((producto) => producto.nombre).indexOf(producto);
+        let index=carritos.findIndex((c)=>c.nombre==producto); //Agreagando Funciones con Orden Superior
         carritos.splice(index, 1);
-        eliminarCarrito(producto); //use recursividad porque con la actualizacion del splice no me toma la nueva longitud
-      } else {
-        alert("no se tiene el producto " + producto + " en su carrito");
-      }
-    }
+        eliminarCarrito(producto);
+        }
   }
 }
 
